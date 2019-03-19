@@ -25,16 +25,34 @@ class Station extends Component {
     return results;
   }
 
+  // Makes the api call as soon as the component
+  // is inserted into the dom and sets the state
+  // with the data it receives
   componentDidMount() {
-    this.setState({
-      name: this.props.location.state.name
-    })
     const stationId = this.props.match.params.id;
     this.getStationDetails(stationId).then(data => {
       this.setState({
+        name: this.props.location.state.name,
+        id: stationId,
         equipment: data
       })
     })
+  }
+
+  // Checks if the new id received is different 
+  // than the one it has in the state. If they are
+  // different it makes an api call with the new id
+  // and fills the component with the new data.
+  componentDidUpdate() {
+    if (this.props.match.params.id !== this.state.id) {
+      this.getStationDetails(this.props.match.params.id).then(data => {
+        this.setState({
+          name: this.props.location.state.name,
+          id: this.props.match.params.id,
+          equipment: data
+        })
+      });
+    }
   }
 
   render() {
