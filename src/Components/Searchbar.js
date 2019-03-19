@@ -42,6 +42,10 @@ class Searchbar extends Component {
     }
   }
 
+  closeDropdown = () => {
+    this.setState({display: 'none'})
+  }
+
   render() {
     const {result, display } = this.state;
     let listOfResults;
@@ -51,7 +55,7 @@ class Searchbar extends Component {
           pathname: station.number,
           state: {name: station.name}
         }
-        return <li><Link to={routingLocation} key={station.number.toString()}>{station.name}</Link></li>
+        return <li><Link to={routingLocation} key={station.number.toString()} onClick={this.closeDropdown}>{station.name}</Link></li>
       })
     } else {
       listOfResults = <li>No results found</li>
