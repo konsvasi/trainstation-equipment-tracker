@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
+import { Link } from 'react-router-dom';
 import '../Styles/Searchbar.css';
 
 // Api where the search call will happen
@@ -21,32 +22,41 @@ class Searchbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      result: []
+      result: [],
+      display: 'none'
     }
   }
 
   handleChange = async (ev) => {
     // clear result list
-    this.setState({result: []});
+    this.setState({result: [], display: 'none'});
     const result = await searchAPIDebounced(ev.target.value);
     const data = await result.json();
-    this.setState({
-      result: data.result
-    })
+    if (data.errMsg) {
+      this.setState({result: [], display: 'none'});
+    } else {
+      this.setState({
+        result: data.result,
+        display: 'block'
+      })
+    }
   }
 
   render() {
+    const {result, display } = this.state;
     let listOfResults;
-    if(this.state.result.length > 0) {
-      listOfResults = this.state.result.map(station => {
-        return <li key={station.number}>{station.name}</li>
+    if(result.length > 0) {
+      listOfResults = result.map(station => {
+        return <li><Link to={station.number.toString()} key={station.number.toString()}>{station.name}</Link></li>
       })
+    } else {
+      listOfResults = <li>No results found</li>
     }
 
     return (
       <div className="searchbar-container">
         <input type="text" placeholder="Search for a trainstation" onChange={this.handleChange} />
-        <div className="dropdown-content">
+        <div className="dropdown-content" style={{display: display}}>
           <ul>{listOfResults}</ul>
         </div>
       </div>

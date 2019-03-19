@@ -12,6 +12,8 @@ input {
 .dropdown-content {
   position: absolute;
   width: 100%;
+  max-height: 350px;
+  overflow: auto;
 }
 
 ul {
