@@ -47,7 +47,11 @@ class Searchbar extends Component {
     let listOfResults;
     if(result.length > 0) {
       listOfResults = result.map(station => {
-        return <li><Link to={station.number.toString()} key={station.number.toString()}>{station.name}</Link></li>
+        const routingLocation = {
+          pathname: station.number,
+          state: {name: station.name}
+        }
+        return <li><Link to={routingLocation} key={station.number.toString()}>{station.name}</Link></li>
       })
     } else {
       listOfResults = <li>No results found</li>
