@@ -1,4 +1,4 @@
-This is an app that let's the user search for trainstation around Germany and get information about
+This is an app that let's the user search for trainstations around Germany and get information about
 the state of the elevators and escalators in each station.
 
 To start the app, clone this repository to your computer.
