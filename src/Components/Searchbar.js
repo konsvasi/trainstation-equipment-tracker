@@ -24,7 +24,8 @@ class Searchbar extends Component {
     this.state = {
       result: [],
       display: 'none'
-    }
+    };
+    this.inputRef = React.createRef();
   }
 
   handleChange = async (ev) => {
@@ -44,6 +45,7 @@ class Searchbar extends Component {
 
   closeDropdown = () => {
     this.setState({display: 'none'})
+    this.inputRef.current.value = '';
   }
 
   render() {
@@ -63,7 +65,7 @@ class Searchbar extends Component {
 
     return (
       <div className="searchbar-container">
-        <input type="text" placeholder="Search for a trainstation" onChange={this.handleChange} />
+        <input type="text" placeholder="Search for a trainstation" onChange={this.handleChange} ref={this.inputRef} />
         <div className="dropdown-content" style={{display: display}}>
           <ul>{listOfResults}</ul>
         </div>

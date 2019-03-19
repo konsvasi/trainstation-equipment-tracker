@@ -55,22 +55,36 @@ class Station extends Component {
     }
   }
 
-  render() {
-    const equipment = this.state.equipment.map(eq => {
+  // Shows the details of the station
+  // if it receives an empty array as an argument
+  // then the station doesn't have equipment and 
+  // a message is displayed instead.
+  showDetails = (equipment_array) => {
+    if (equipment_array.length) {
+     return equipment_array.map(eq => {
       const background_color = eq.state === 'ACTIVE' ? 'rgb(50,205,50)' : 'rgb(255, 0, 0)';
       return (
         <div key={eq.equipmentnumber.toString()} className="equipment">
           <h2>{eq.type}</h2>
           <p>{eq.description}</p>
           <p className="state" style={{backgroundColor: background_color}}>{eq.state}</p>
-      </div>
+        </div>
       )
-    })
+     }) 
+    }
 
+    return (
+      <div className="equipment">
+        <h2>This station doesn't have elevators or escalators</h2>
+      </div>
+    )
+  }
+
+  render() {
     return (
       <div className="station">
         <h1 className="station-name">{this.state.name}</h1>
-        {equipment}
+        {this.showDetails(this.state.equipment)}
         <Link className="link-back" to="/">back</Link>
       </div>
     )
