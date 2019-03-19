@@ -1,8 +1,39 @@
+h2, p {
+  color: rgb(244,245,246);
+}
+
+h2, p {
+  padding: 0;
+  margin: 0;
+}
 .station {
   grid-column: 1/-1;
   grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: minmax(100px, auto) auto;
+  grid-gap: 15px;
 }
 
+.station-name {
+  grid-column: 1/-1;
+}
 .equipment-container {
-  background-color: grey;
+  background-color: #849d9a;
+}
+
+.equipment {
+  background-color: #849d9a;
+  padding: 15px;
+}
+
+.state {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.link-back {
+  grid-column: 1;
+  font-size: 18px;
+
 }

@@ -7,10 +7,16 @@
 input {
   width: 100%;
   height: 50px;
+  background-color: rgb(244,245,246);
+  color: #484848;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px;
 }
 
 .dropdown-content {
   position: absolute;
+  background-color: white;
   width: 100%;
   max-height: 350px;
   overflow: auto;
@@ -18,4 +24,18 @@ input {
 
 ul {
   list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 12px 10px;
+}
+
+li:hover {
+  background-color: rgb(244,245,246);
+}
+
+.link-to-station {
+  text-decoration: none;
+  color: #484848;
 }

@@ -56,21 +56,22 @@ class Station extends Component {
   }
 
   render() {
-    const equipment = this.state.equipment.map(eq => (
-      <div key={eq.equipmentnumber.toString()}>
-        <h2>{eq.type}</h2>
-        <p>{eq.description}</p>
-        <p>{eq.state}</p>
+    const equipment = this.state.equipment.map(eq => {
+      const background_color = eq.state === 'ACTIVE' ? 'rgb(50,205,50)' : 'rgb(255, 0, 0)';
+      return (
+        <div key={eq.equipmentnumber.toString()} className="equipment">
+          <h2>{eq.type}</h2>
+          <p>{eq.description}</p>
+          <p className="state" style={{backgroundColor: background_color}}>{eq.state}</p>
       </div>
-    ))
+      )
+    })
 
     return (
       <div className="station">
-        <h1>{this.state.name}</h1>
-        <div className="equipment-container">
-          {equipment}
-          <Link to="/">back</Link>
-        </div>
+        <h1 className="station-name">{this.state.name}</h1>
+        {equipment}
+        <Link className="link-back" to="/">back</Link>
       </div>
     )
   }
